@@ -1,0 +1,1478 @@
+{
+  "id": "5e980b6e497d4f21e01f880f",
+  "name": "App = Sock Shop",
+  "app_scope_id": "5e980a96755f0211e719c5dc",
+  "description": "A Cloud Native Microservices App",
+  "author": "Site Admin",
+  "primary": true,
+  "alternate_query_mode": true,
+  "enforced_version": 0,
+  "enforcement_enabled": false,
+  "created_at": 1587022702,
+  "latest_adm_version": 0,
+  "version": "v0",
+  "app_scope": {
+    "filter_type": "AppScope",
+    "id": "5e980a96755f0211e719c5dc",
+    "name": "anhdle:AUS:ContainerApps:sock-shop",
+    "description": null,
+    "short_name": "sock-shop",
+    "priority": "065:001:005:002:Z",
+    "short_priority": 2,
+    "policy_priority": 16,
+    "query": {
+      "type": "and",
+      "filters": [
+        {
+          "field": "vrf_id",
+          "type": "eq",
+          "value": 676737
+        },
+        {
+          "type": "or",
+          "filters": [
+            {
+              "field": "ip",
+              "type": "subnet",
+              "value": "10.0.0.0/8"
+            },
+            {
+              "field": "ip",
+              "type": "subnet",
+              "value": "172.16.0.0/12"
+            },
+            {
+              "field": "ip",
+              "type": "subnet",
+              "value": "192.168.0.0/16"
+            },
+            {
+              "field": "ip",
+              "type": "subnet",
+              "value": "224.0.0.0/4"
+            }
+          ]
+        },
+        {
+          "type": "or",
+          "filters": [
+            {
+              "field": "user_Scope",
+              "type": "eq",
+              "value": "ContainerApps"
+            },
+            {
+              "field": "user_orchestrator_system/cluster_name",
+              "type": "eq",
+              "value": "k8s-cluster"
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "filters": [
+            {
+              "field": "user_orchestrator_system/namespace",
+              "type": "eq",
+              "value": "sock-shop"
+            }
+          ]
+        }
+      ]
+    },
+    "short_query": {
+      "type": "and",
+      "filters": [
+        {
+          "field": "user_orchestrator_system/namespace",
+          "type": "eq",
+          "value": "sock-shop"
+        }
+      ]
+    },
+    "dirty": false,
+    "dirty_short_query": null,
+    "vrf_id": 676737,
+    "parent_app_scope_id": "5e980970755f02215b19c75b",
+    "root_app_scope_id": "5ca1a63f755f0217288fbfa0",
+    "child_app_scope_ids": [
+
+    ],
+    "created_at": 1587022486,
+    "updated_at": 1587022487
+  },
+  "absolute_policies": [
+
+  ],
+  "default_policies": [
+    {
+      "consumer_filter_id": "5e980b52497d4f0c7f1f8c1b",
+      "provider_filter_id": "5e980b4f755f025dad19cb15",
+      "consumer_filter_name": "front-end-sock-shop",
+      "provider_filter_name": "catalogue-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 20
+    },
+    {
+      "consumer_filter_id": "5e980b52497d4f0c7f1f8c1b",
+      "provider_filter_id": "5e980b47755f025dad19cb11",
+      "consumer_filter_name": "front-end-sock-shop",
+      "provider_filter_name": "carts-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 20
+    },
+    {
+      "consumer_filter_id": "5e980b52497d4f0c7f1f8c1b",
+      "provider_filter_id": "5e980b5c497d4f64d41f8b46",
+      "consumer_filter_name": "front-end-sock-shop",
+      "provider_filter_name": "payment-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 20
+    },
+    {
+      "consumer_filter_id": "5e980b52497d4f0c7f1f8c1b",
+      "provider_filter_id": "5e980b69755f0261b819c905",
+      "consumer_filter_name": "front-end-sock-shop",
+      "provider_filter_name": "user-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 20
+    },
+    {
+      "consumer_filter_id": "5e980b54755f02215b19c764",
+      "provider_filter_id": "5e980b57497d4f64d41f8b44",
+      "consumer_filter_name": "orders-sock-shop",
+      "provider_filter_name": "orders-db-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            27017,
+            27017
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 30
+    },
+    {
+      "consumer_filter_id": "5e980b54755f02215b19c764",
+      "provider_filter_id": "5e980b69755f0261b819c905",
+      "consumer_filter_name": "orders-sock-shop",
+      "provider_filter_name": "user-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 30
+    },
+    {
+      "consumer_filter_id": "5e980b54755f02215b19c764",
+      "provider_filter_id": "5e980b47755f025dad19cb11",
+      "consumer_filter_name": "orders-sock-shop",
+      "provider_filter_name": "carts-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 30
+    },
+    {
+      "consumer_filter_id": "5e980b54755f02215b19c764",
+      "provider_filter_id": "5e980b5c497d4f64d41f8b46",
+      "consumer_filter_name": "orders-sock-shop",
+      "provider_filter_name": "payment-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 30
+    },
+    {
+      "consumer_filter_id": "5e980b54755f02215b19c764",
+      "provider_filter_id": "5e980b65755f0211e719c5ea",
+      "consumer_filter_name": "orders-sock-shop",
+      "provider_filter_name": "shipping-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 30
+    },
+    {
+      "consumer_filter_id": "5e980b67755f0211e719c5ec",
+      "provider_filter_id": "5e980b6a497d4f21e01f880d",
+      "consumer_filter_name": "user-sock-shop",
+      "provider_filter_name": "user-db-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            27017,
+            27017
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 40
+    },
+    {
+      "consumer_filter_id": "5e980b4a497d4f0c7f1f8c19",
+      "provider_filter_id": "5e980b4e755f025dad19cb13",
+      "consumer_filter_name": "catalogue-sock-shop",
+      "provider_filter_name": "catalogue-db-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            3306,
+            3306
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 50
+    },
+    {
+      "consumer_filter_id": "5e980b5a755f025dad19cb17",
+      "provider_filter_id": "5e980b59497d4f7ff11f88ac",
+      "consumer_filter_name": "payment-sock-shop",
+      "provider_filter_name": "orders-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 50
+    },
+    {
+      "consumer_filter_id": "5e980b52497d4f0c7f1f8c1b",
+      "provider_filter_id": "5e980b59497d4f7ff11f88ac",
+      "consumer_filter_name": "front-end-sock-shop",
+      "provider_filter_name": "orders-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 50
+    },
+    {
+      "consumer_filter_id": "5e980b44755f025dad19cb0d",
+      "provider_filter_id": "5e980b49755f0211e719c5e2",
+      "consumer_filter_name": "carts-sock-shop",
+      "provider_filter_name": "carts-db-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            27017,
+            27017
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 60
+    },
+    {
+      "consumer_filter_id": "5e980b5d497d4f21e01f880b",
+      "provider_filter_id": "5e980b62497d4f64d41f8b48",
+      "consumer_filter_name": "queue-master-sock-shop",
+      "provider_filter_name": "rabbitmq-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            5672,
+            5672
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 70
+    },
+    {
+      "consumer_filter_id": "5e980b64755f02215b19c766",
+      "provider_filter_id": "5e980b62497d4f64d41f8b48",
+      "consumer_filter_name": "shipping-sock-shop",
+      "provider_filter_name": "rabbitmq-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            5672,
+            5672
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 80
+    },
+    {
+      "consumer_filter_id": "5e980b61755f0211e719c5e8",
+      "provider_filter_id": "5e980b5f755f0261b819c903",
+      "consumer_filter_name": "rabbitmq-sock-shop",
+      "provider_filter_name": "queue-master-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 90
+    },
+    {
+      "consumer_filter_id": "5e980b41755f025dad19cb0b",
+      "provider_filter_id": "5e980b51755f0211e719c5e6",
+      "consumer_filter_name": "all-pods-sock-shop",
+      "provider_filter_name": "core-dns-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            53,
+            53
+          ],
+          "proto": 6,
+          "approved": true
+        },
+        {
+          "port": [
+            9153,
+            9153
+          ],
+          "proto": 6,
+          "approved": true
+        },
+        {
+          "port": [
+            53,
+            53
+          ],
+          "proto": 17,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 110
+    },
+    {
+      "consumer_filter_id": "5e980b6c755f02215b19c768",
+      "provider_filter_id": "5e980b42755f02215b19c762",
+      "consumer_filter_name": "kube-nodes-sock-shop",
+      "provider_filter_name": "front-end-svc-sock-shop",
+      "l4_params": [
+        {
+          "port": [
+            80,
+            80
+          ],
+          "proto": 6,
+          "approved": true
+        }
+      ],
+      "action": "ALLOW",
+      "priority": 120
+    }
+  ],
+  "catch_all_action": "DENY",
+  "inventory_filters": [
+    {
+      "id": "5e980b41755f025dad19cb0b",
+      "filter_type": "UserInventoryFilter",
+      "name": "all-pods-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/workload_type",
+                "type": "eq",
+                "value": "pod"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b49755f0211e719c5e2",
+      "filter_type": "UserInventoryFilter",
+      "name": "carts-db-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "carts-db"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b44755f025dad19cb0d",
+      "filter_type": "UserInventoryFilter",
+      "name": "carts-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "carts"
+              },
+              {
+                "type": "not",
+                "filter": {
+                  "field": "user_orchestrator_system/pod_name",
+                  "type": "contains",
+                  "value": "carts-db"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b47755f025dad19cb11",
+      "filter_type": "UserInventoryFilter",
+      "name": "carts-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "carts"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b4e755f025dad19cb13",
+      "filter_type": "UserInventoryFilter",
+      "name": "catalogue-db-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "catalogue-db"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b4a497d4f0c7f1f8c19",
+      "filter_type": "UserInventoryFilter",
+      "name": "catalogue-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "catalogue"
+              },
+              {
+                "type": "not",
+                "filter": {
+                  "field": "user_orchestrator_system/pod_name",
+                  "type": "contains",
+                  "value": "catalogue-db"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b4f755f025dad19cb15",
+      "filter_type": "UserInventoryFilter",
+      "name": "catalogue-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "catalogue"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b51755f0211e719c5e6",
+      "filter_type": "UserInventoryFilter",
+      "name": "core-dns-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "kube-dns"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "kube-system"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b52497d4f0c7f1f8c1b",
+      "filter_type": "UserInventoryFilter",
+      "name": "front-end-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "front-end"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b42755f02215b19c762",
+      "filter_type": "UserInventoryFilter",
+      "name": "front-end-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "front-end"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b6c755f02215b19c768",
+      "filter_type": "UserInventoryFilter",
+      "name": "kube-nodes-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "or",
+            "filters": [
+              {
+                "field": "user_Function",
+                "type": "eq",
+                "value": "k8s-nodes"
+              },
+              {
+                "field": "user_Function",
+                "type": "eq",
+                "value": "k8s-masters"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b57497d4f64d41f8b44",
+      "filter_type": "UserInventoryFilter",
+      "name": "orders-db-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "orders-db"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b54755f02215b19c764",
+      "filter_type": "UserInventoryFilter",
+      "name": "orders-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "orders"
+              },
+              {
+                "type": "not",
+                "filter": {
+                  "field": "user_orchestrator_system/pod_name",
+                  "type": "contains",
+                  "value": "orders-db"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b59497d4f7ff11f88ac",
+      "filter_type": "UserInventoryFilter",
+      "name": "orders-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "orders"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b5a755f025dad19cb17",
+      "filter_type": "UserInventoryFilter",
+      "name": "payment-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "payment"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b5c497d4f64d41f8b46",
+      "filter_type": "UserInventoryFilter",
+      "name": "payment-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "payment"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b5d497d4f21e01f880b",
+      "filter_type": "UserInventoryFilter",
+      "name": "queue-master-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "queue-master"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b5f755f0261b819c903",
+      "filter_type": "UserInventoryFilter",
+      "name": "queue-master-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "queue-master"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b61755f0211e719c5e8",
+      "filter_type": "UserInventoryFilter",
+      "name": "rabbitmq-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "rabbitmq"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b62497d4f64d41f8b48",
+      "filter_type": "UserInventoryFilter",
+      "name": "rabbitmq-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "rabbitmq"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b64755f02215b19c766",
+      "filter_type": "UserInventoryFilter",
+      "name": "shipping-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "shipping"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b65755f0211e719c5ea",
+      "filter_type": "UserInventoryFilter",
+      "name": "shipping-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "shipping"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b6a497d4f21e01f880d",
+      "filter_type": "UserInventoryFilter",
+      "name": "user-db-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "user-db"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b67755f0211e719c5ec",
+      "filter_type": "UserInventoryFilter",
+      "name": "user-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              },
+              {
+                "field": "user_orchestrator_system/pod_name",
+                "type": "contains",
+                "value": "user"
+              },
+              {
+                "type": "not",
+                "filter": {
+                  "field": "user_orchestrator_system/pod_name",
+                  "type": "contains",
+                  "value": "user-db"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    },
+    {
+      "id": "5e980b69755f0261b819c905",
+      "filter_type": "UserInventoryFilter",
+      "name": "user-svc-sock-shop",
+      "query": {
+        "type": "and",
+        "filters": [
+          {
+            "field": "vrf_id",
+            "type": "eq",
+            "value": 676737
+          },
+          {
+            "type": "and",
+            "filters": [
+              {
+                "field": "user_orchestrator_system/cluster_name",
+                "type": "eq",
+                "value": "k8s-cluster"
+              },
+              {
+                "field": "user_orchestrator_system/service_name",
+                "type": "eq",
+                "value": "user"
+              },
+              {
+                "field": "user_orchestrator_system/namespace",
+                "type": "eq",
+                "value": "sock-shop"
+              }
+            ]
+          }
+        ]
+      },
+      "parent_app_scope": {
+        "id": "5e980970755f02215b19c75b",
+        "name": "anhdle:AUS:ContainerApps"
+      }
+    }
+  ],
+  "vrf": {
+    "id": 676737,
+    "name": "anhdle",
+    "tenant_id": 676737,
+    "tenant_name": "676737"
+  }
+}
