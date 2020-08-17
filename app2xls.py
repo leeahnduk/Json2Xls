@@ -28,7 +28,7 @@ Cyan = "\33[0;36m"  #Return
 
 # =================================================================================
 # See reason below -- why verify=False param is used
-# python3 json2xls.py --url https://10.71.129.30/ --credential Japan_api_credentials.json --policies sockshop.json
+# python3 app2xls.py --url https://10.71.129.30/ --credential Japan_api_credentials.json
 # feedback: Le Anh Duc - anhdle@cisco.com
 # =================================================================================
 requests.packages.urllib3.disable_warnings()
@@ -37,7 +37,6 @@ requests.packages.urllib3.disable_warnings()
 parser = argparse.ArgumentParser(description='Tetration Create Policy under Apps')
 parser.add_argument('--url', help='Tetration URL', required=True)
 parser.add_argument('--credential', help='Path to Tetration json credential file', required=True)
-parser.add_argument('--policies', default=None, help='Path to Policies Configuration file')
 args = parser.parse_args()
 
 
@@ -333,20 +332,9 @@ def convApps2xls(rc):
     AllApps = GetApps(rc)
     scopes = GetApplicationScopes(rc)
     apps = []
-    if args.policies is None:
-        print('%% No Policies Configuration file given - connecting to Tetration to download')
-        appIDs = selectTetApps(AllApps)
-        apps.append(downloadPolicies(rc, appIDs))
-    else:
-        try:
-            with open(args.policies) as config_file:
-                apps.append(json.load(config_file))
-        except IOError:
-            print('%% Could not load configuration file')
-            return
-        except ValueError:
-            print('Could not load improperly formatted configuration file')
-            return
+    appIDs = selectTetApps(AllApps)
+    apps.append(downloadPolicies(rc, appIDs))
+    print (json.dumps(apps, indent=4))
 
     # Load in the IANA Protocols
     protocols = {}
@@ -362,8 +350,8 @@ def convApps2xls(rc):
         print('Could not load improperly formatted protocols file')
         return
     
-    for app in apps:
-        workbook = xlsxwriter.Workbook('./'+app['name'].replace('/','-')+'.xlsx')
+    for app in apps[0]:
+        workbook = xlsxwriter.Workbook(app['name'].replace('/','-')+'.xlsx')
         bold = workbook.add_format({'bold': True})
 
         if 'clusters' in app.keys():
@@ -435,6 +423,7 @@ def convApps2xls(rc):
                 i+=1
         
         workbook.close()
+        print (app['name'].replace('/','-')+'.xlsx created for policies conversion to CSV')
 
 
 def main():
