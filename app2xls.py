@@ -24,7 +24,7 @@ CGREEN = "\33[32m"  #Information
 CYELLOW = "\33[33m" #Request Input
 CRED = "\33[31m"    #Error
 URED = "\33[4;31m" 
-Cyan = "\33[0;36m"  #Return
+cyan = "\33[0;36m"  #Return
 
 # =================================================================================
 # See reason below -- why verify=False param is used
@@ -83,6 +83,18 @@ def GetApplicationScopes(rc):
     else:
         return resp.json()
 
+def resolveFilter(rc, filters):# return all IP and hosts for a specific filters
+    ipSet = []
+    body = json.dumps({'filter':filters['query']})
+   
+    resp = rc.post('/inventory/search',json_body=body)
+    if resp:
+        ips = resp.json()
+        for i in ips['results']:
+            ipSet.append(i['ip'])
+
+    return ipSet
+
 def GetAppScopeId(scopes,name):
     try:
         return [scope["id"] for scope in scopes if scope["name"] == name][0]
@@ -138,7 +150,7 @@ def getCatchAllDetail(rc, id):
 
 def selectTetApps(apps):
     # Return App IDa for one or many Tetration Apps that we choose
-    print (Cyan + "\nHere are all Application workspaces in your cluster: " + CEND)
+    print (cyan + "\nHere are all Application workspaces in your cluster: " + CEND)
     ShowApps(apps)
     choice = input('\nSelect which Tetration Apps (Number, Number) above you want to download polices: ')
 
@@ -208,7 +220,7 @@ def GetInventoriesId(inventories, name):
     try:
         for inv in inventories:
             if name == inv["name"]:
-                print (Cyan + "\nHere is your Inventory ID: " + inv["id"] + Cend)
+                print (cyan + "\nHere is your Inventory ID: " + inv["id"] + Cend)
                 return inv["id"]
             else: continue
     except:
@@ -253,7 +265,7 @@ def GetInventoriesId(inventories, name):
     try:
         for inv in inventories:
             if name == inv["name"]:
-                print (Cyan + "\nHere is your Inventory ID: " + inv["id"])
+                print (cyan + "\nHere is your Inventory ID: " + inv["id"])
                 return inv["id"]
             else: continue
     except:
@@ -334,7 +346,7 @@ def convApps2xls(rc):
     apps = []
     appIDs = selectTetApps(AllApps)
     apps.append(downloadPolicies(rc, appIDs))
-    print (json.dumps(apps, indent=4))
+    #print (json.dumps(apps, indent=4))
 
     # Load in the IANA Protocols
     protocols = {}
@@ -356,8 +368,12 @@ def convApps2xls(rc):
 
         if 'clusters' in app.keys():
             worksheet = workbook.add_worksheet(name='App Servers')
-            worksheet.set_row(0, None, bold)
-            worksheet.write_row(0,0,['Hostname','IP','Cluster Membership'])
+            cell_format = workbook.add_format()
+            cell_format.set_bg_color('cyan')
+            cell_format.set_bold()
+            cell_format.set_font_color('black')
+            worksheet.set_row(0, None)
+            worksheet.write_row(0,0,['Hostname','IP','Cluster Membership'],cell_format)
             i=1
             clusters = app['clusters']
             for cluster in clusters:
@@ -368,26 +384,43 @@ def convApps2xls(rc):
                     i+=1
             worksheet.set_column(0, 0, 30)
             worksheet.set_column(1, 1, 15)
+            worksheet.set_column(2, 2, 30)
 
         if 'inventory_filters' in app.keys():
             i=1
             worksheet = workbook.add_worksheet(name='External Groups')
-            worksheet.set_row(0, None, bold)
-            worksheet.write_row(0,0,['Inventory Filter Name','Filter Definition'])
+            cell_format = workbook.add_format()
+            cell_format.set_text_wrap()
+            header_format = workbook.add_format()
+            header_format.set_bg_color('cyan')
+            header_format.set_bold()
+            header_format.set_font_color('black')
+            worksheet.set_row(0, None)
+            worksheet.write_row(0,0,['Inventory Filter Name', 'IP Addresses', 'Filter Definition'],header_format)
             worksheet.set_column(0, 0, 30)
+            worksheet.set_column(1, 1, 60, cell_format)
+            worksheet.set_column(2, 2, 50, cell_format)
 
             filters = app['inventory_filters']
             for invfilter in filters:
-                worksheet.write_row(i,0,[invfilter['name'],filterToString(invfilter['query'])])
+                #print (json.dumps(invfilter, indent=4))
+                ipSet = resolveFilter(rc, invfilter)
+                #print (ipSet)
+                worksheet.write_row(i,0,[invfilter['name'], str(ipSet), filterToString(invfilter['query'])])
                 i+=1
 
         if 'default_policies' in app.keys():
             i=1
             worksheet = workbook.add_worksheet(name='Policies')
-            worksheet.set_row(0, None, bold)
-            worksheet.write_row(0,0,['Consumer Group','Provider Group','Services'])
+            header_format = workbook.add_format()
+            header_format.set_bg_color('cyan')
+            header_format.set_bold()
+            header_format.set_font_color('black')
+            worksheet.set_row(0, None)
+            worksheet.write_row(0,0,['Consumer Group','Provider Group','Services'],header_format)
             worksheet.set_column(0, 0, 30)
             worksheet.set_column(1, 1, 30)
+            worksheet.set_column(2, 2, 30)
 
             policies = app['default_policies']
             for policy in policies:
